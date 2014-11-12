@@ -1,12 +1,19 @@
 package com.android.semanadeeletronica.destin;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.semanadeeletronica.destin.util.Navigation;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
@@ -55,4 +62,51 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
+
+/*
+    public class DownloadTask  extends AsyncTask<String, Long, ArrayList<Destination>> {
+
+        protected ArrayList<Destination> doInBackground(String... args) {
+
+            ArrayList<Destination> destinos = downloadDestinations();
+
+            return destinos;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Destination> result) {
+            destinationList = result;
+            ListAdapter adapter = new ListAdapter(context, destinationList);
+            listView.setAdapter(adapter);
+            listView.setDividerHeight(0);
+
+            //listener que escuta quando um item da lista é clicado
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Navigation.navigate(context, Screen.Detalhes, Navigation.Animation.GO, destinationList.get(position - 1));
+                }
+            });
+        }
+
+        protected ArrayList<Destination> downloadDestinations() {
+            Type destinosType = new TypeToken<ArrayList<Destination>>(){}.getType();
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+
+            JSONDownloader downloader = new JSONDownloader();
+            String result = downloader.downloaderJSONArray("http://destino.herokuapp.com/destinos.json");
+
+            Log.i("Downloader", result);
+
+            ArrayList<Destination> destinations = null;
+            try {
+                destinations = gson.fromJson(result, destinosType);
+            } catch (Exception e) {
+                Log.i("Post parse", e.getMessage());
+            }
+            return destinations;
+        }
+    }*/
 }
+

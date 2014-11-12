@@ -89,7 +89,7 @@ public class JSONDownloader {
     }
 
 
-    public JSONArray downloaderJSONArray(String urlJSONArray) {
+    public String downloaderJSONArray(String urlJSONArray) {
         JSONArray retornoArrayJSON = new JSONArray();
         if (urlJSONArray != null) {
             Log.i(LOG_TAG, "downloaderJSONArray: " + urlJSONArray);
@@ -113,24 +113,21 @@ public class JSONDownloader {
                 HttpEntity httpEntity = response.getEntity();
                 String result = EntityUtils.toString(httpEntity, HTTP.UTF_8);
 
-                retornoArrayJSON = new JSONArray(result);
+                //retornoArrayJSON = new JSONArray(result);
 
                 Log.i(LOG_TAG, "Retorno SONArray: " + retornoArrayJSON.toString());
 
-                return retornoArrayJSON;
+                return result;
             } catch (IOException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
-            } catch (JSONException e) {
-                Log.e(LOG_TAG, e.getMessage(), e);
-
             } catch (Exception e) {
                 Log.e(LOG_TAG, e.getMessage(), e);
             }
 
         } else {
-            return retornoArrayJSON;
+            return "";
         }
-        return retornoArrayJSON;
+        return "";
     }
 
 
